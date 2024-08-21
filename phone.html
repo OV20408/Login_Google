@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inicio de Sesión con Teléfono</title>
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="phone.js"></script>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Inicio de Sesión con Teléfono</h1>
+    </header>
+    <main>
+      <div class="auth-container" id="phoneAuthContainer">
+        <!-- Formulario para ingresar el número de teléfono -->
+        <form id="phoneAuthForm">
+          <div class="form-group">
+            <label for="phoneNumber">Número de Teléfono</label>
+            <input type="tel" id="phoneNumber" name="phoneNumber" required>
+          </div>
+          <div id="recaptcha-container"></div> <!-- reCAPTCHA container -->
+          <button type="submit" id="sendCodeBtn">Enviar código</button>
+        </form>
+
+        <!-- Formulario para ingresar el código de verificación -->
+        <div id="verificationCodeContainer" style="display: none;">
+          <form id="verificationCodeForm">
+            <div class="form-group">
+              <label for="verificationCode">Código de Verificación</label>
+              <input type="text" id="verificationCode" name="verificationCode" required>
+            </div>
+            <button type="submit" id="verifyCodeBtn">Verificar código</button>
+          </form>
+        </div>
+
+        <button class="back-btn" onclick="window.location.href='index.html'">Volver</button>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

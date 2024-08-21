@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/Proyecto de Sistemas Other File/Registro de Usuario/css/style.css">
+    <title>Dashboard</title>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Bienvenido a tu Dashboard</h1>
+        </header>
+        <main>
+            <p>¡Has iniciado sesión con éxito!</p>
+            <!-- Aquí puedes agregar más contenido y funcionalidades -->
+            <button class="logout-btn" onclick="logout()">Cerrar sesión</button>
+        </main>
+    </div>
+    <script>
+        function logout() {
+            // Lógica para cerrar la sesión
+            alert('Sesión cerrada');
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>
