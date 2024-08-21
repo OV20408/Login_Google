@@ -22,39 +22,43 @@ window.recaptchaVerifier = new RecaptchaVerifier('recaptcha-container', {
   'size': 'invisible',
   'callback': (response) => {
     // reCAPTCHA resuelto, permitir signInWithPhoneNumber.
-    onSignInSubmit();
   }
 }, auth);
 
-// Manejar el envío del número de teléfono
-document.getElementById('phoneAuthForm').addEventListener('submit', (event) => {
-  event.preventDefault();
-  const phoneNumber = document.getElementById('phoneNumber').value;
-  const appVerifier = window.recaptchaVerifier;
+// Asegúrate de que el DOM esté completamente cargado antes de agregar los event listeners
+document.addEventListener('DOMContentLoaded', () => {
 
-  signInWithPhoneNumber(auth, phoneNumber, appVerifier)
-    .then((confirmationResult) => {
-      // Código enviado correctamente
-      window.confirmationResult = confirmationResult;
-      document.getElementById('phoneAuthContainer').style.display = 'none';
-      document.getElementById('verificationCodeContainer').style.display = 'block';
-    })
-    .catch((error) => {
-      console.error('Error en el envío del SMS:', error);
-    });
-});
+  // Manejar el envío del número de teléfono
+  document.getElementById('phoneAuthForm').addEventListener('submit', (event) => {
+    event.preventDefault();
+    const phoneNumber = document.getElementById('phoneNumber').value;
+    const appVerifier = window.recaptchaVerifier;
 
-// Manejar la verificación del código
-document.getElementById('verificationCodeForm').addEventListener('submit', (event) => {
-  event.preventDefault();
-  const code = document.getElementById('verificationCode').value;
-  window.confirmationResult.confirm(code)
-    .then((result) => {
-      const user = result.user;
-      console.log('Usuario iniciado sesión:', user);
-      // Aquí puedes redirigir al usuario a otra página o mostrar un mensaje
-    })
-    .catch((error) => {
-      console.error('Error en la verificación del código:', error);
-    });
+    signInWithPhoneNumber(auth, phoneNumber, appVerifier)
+      .then((confirmationResult) => {
+        // Código enviado correctamente
+        window.confirmationResult = confirmationResult;
+        document.getElementById('phoneAuthContainer').style.display = 'none';
+        document.getElementById('verificationCodeContainer').style.display = 'block';
+      })
+      .catch((error) => {
+        console.error('Error en el envío del SMS:', error);
+      });
+  });
+
+  // Manejar la verificación del código
+  document.getElementById('verificationCodeForm').addEventListener('submit', (event) => {
+    event.preventDefault();
+    const code = document.getElementById('verificationCode').value;
+    window.confirmationResult.confirm(code)
+      .then((result) => {
+        const user = result.user;
+        console.log('Usuario iniciado sesión:', user);
+        // Aquí puedes redirigir al usuario a otra página o mostrar un mensaje
+      })
+      .catch((error) => {
+        console.error('Error en la verificación del código:', error);
+      });
+  });
+
 });
